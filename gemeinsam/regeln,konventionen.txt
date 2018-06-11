@@ -1,0 +1,12 @@
+# Code
+- Koordinaten in der Reihenfolge: Zeile,Spalte / y,x
+- Variablen und Funktionsbezeichnungen auf Deutsch
+
+# Kosmetisch
+- Einrückung wie im Unterricht
+- Einrückung mit Tabs
+
+# Git
+- Commit Nachrichten auf Deutsch
+- Commit wenn ein sinnvoller Codeabschnitt fertiggestellt ist
+- Commit von unvollständigem Code um in der Schule daran weiterzuarbeiten ist zugelassen. Kennzeichnen mit:
