@@ -16,7 +16,7 @@ while [ $SAPIstEinBloedesFach -eq 1 ]
 do
 	clear
 	rm -f ./a.out
-	gcc $1
+	gcc $1 -lncurses
 	echo "" #Leerzeile zwischen evtl. Kompilerwarnungen und Programmausführung
 	./a.out
 	echo -en "\033[1;30m\nProgramm beendet mit Exit Code $?. "
