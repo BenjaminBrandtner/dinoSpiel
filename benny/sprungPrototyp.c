@@ -16,6 +16,7 @@ int main (void)
 	int schritt=0;
 	int sprungtimer=0;
 	int geschwindigkeit=3; //ms verzögerung zwischen schritten
+	int fehler;
 
 	initscr();
 	noecho();
@@ -66,7 +67,7 @@ int main (void)
 		{
 			eingabe=getch();
 		}
-		usleep(geschwindigkeit*10000);
+		fehler=usleep(geschwindigkeit*10000);
 	}
 
 	endwin();
