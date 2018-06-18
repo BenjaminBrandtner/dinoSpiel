@@ -1,5 +1,6 @@
 /*Author: Benjamin Brandtner
- * dino der springt auf KEY_UP */
+ * Proof of concept einer Sprungfunktion
+ * Auf einen Druck auf Pfeiltaste_Oben wird ein Animationstimer auf 10 gesetzt, der jeden Frame um eins runterzählt. Zu bestimmten Zeitpunkten wird die y Koordinate des Dinos erhöht, bzw erniedrigt */
 
 #include <stdio.h>
 #include <ncurses.h>
@@ -21,7 +22,7 @@ int main (void)
 	initscr();
 	noecho();
 	cbreak();
-	nodelay(stdscr, TRUE);
+	nodelay(stdscr, TRUE); //getch hält das Programm nicht an
 	keypad(stdscr, TRUE);
 
 	hindernisX=COLS; //hindernis beginnt am rechten Rand des fensters
@@ -50,12 +51,11 @@ int main (void)
 			hindernisX--;
 		}
 
-		//zeichne
-		//Debug-Infos
+		//zeichne Debug-Infos
 		mvprintw(0,0,"Schritt: %i", schritt++);
 		mvprintw(0,13,"Letzte Taste: %i   ", eingabe);
 		mvprintw(0,32,"Sprungtimer: %i  ", sprungtimer);
-		//Spiel
+		//zeichne Spiel
 		zeichneDino(&dinoY);
 		zeichneHindernis(&hindernisX);
 		mvchgat(15,0,-1, A_UNDERLINE, 0, NULL);
