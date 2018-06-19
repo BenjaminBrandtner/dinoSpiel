@@ -88,13 +88,21 @@ void zeigePause (void)
 		switch(eingabe)
 		{
 			case KEY_UP:
-				if(auswahl!=1)
+				if(auswahl==1)
+				{
+					auswahl=3;
+				}
+				else
 				{
 					auswahl--;
 				}
 			break;
 			case KEY_DOWN:
-				if(auswahl!=3)
+				if(auswahl==3)
+				{
+					auswahl=1;
+				}
+				else
 				{
 					auswahl++;
 				}

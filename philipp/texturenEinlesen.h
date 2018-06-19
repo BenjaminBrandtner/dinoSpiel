@@ -56,3 +56,29 @@ void einlesenWolken(struct tex_wolken *wolo, char pfad[])
 	}
 	return;
 }
+
+void einlesenUeberschrift(struct ueberschrift *textur, char pfad[])
+{
+	FILE *in;
+	char temp[85];
+	int i,j;
+	
+	
+	in = fopen(pfad,"r");
+	
+	if(in == NULL)
+	{
+		printf("\n\nERROR 404\n\n");
+	} //end if
+
+	for(i=0;i<7;i++)
+	{
+		fgets(temp,85,in);
+		
+		for(j=0;j<82;j++)
+		{
+			(*textur).textur[i][j] = temp[j];
+		}
+	}
+	return;
+}

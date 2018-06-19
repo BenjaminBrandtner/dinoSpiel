@@ -15,11 +15,7 @@ void anzeigenTexturen(struct tex_rest *textur, int y, int x)
 				attron(A_REVERSE);
 				mvprintw(y+i,x+j," ");
 				attroff(A_REVERSE);
-			}
-			else
-			{
-				mvprintw(y+i,x+j," ");
-			} //end if
+			}//end if
 		} //end for
 	} //end for
 	return;
@@ -39,10 +35,26 @@ void anzeigenWolken(struct tex_wolken *textur, int y, int x)
 				attron(A_REVERSE);
 				mvprintw(y+i,x+j," ");
 				attroff(A_REVERSE);
-			}
-			else
+			} //end if
+		} //end for
+	} //end for
+	return;
+}
+
+void anzeigenUeberschrift(struct ueberschrift *textur, int y, int x)
+{
+	int i;
+	int j;
+	
+	for (i = 0; i < 7; i++)
+	{
+		for (j = 0; j < 81; j++)
+		{
+			if((*textur).textur[i][j]=='#')
 			{
+				attron(A_REVERSE);
 				mvprintw(y+i,x+j," ");
+				attroff(A_REVERSE);
 			} //end if
 		} //end for
 	} //end for
