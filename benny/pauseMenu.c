@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
-#include <stdlib.h>
+#include <stdlib.h> //für exit()
 #include <ncurses.h>
 
 //Der von ncurses definierte Wert für Enter funktioniert nicht immer. Hier wird er auf ASCII 10 also '\n' gesetzt.
@@ -24,10 +24,10 @@ int main (void)
 	initscr();
 	cbreak();
 	noecho();
+	curs_set(0); //Set cursor invisible
 	nodelay(stdscr, TRUE);
 	keypad(stdscr, TRUE);
 
-	curs_set(0); //Set cursor invisible
 	ESCDELAY=0; //0ms wird nach einem Druck auf Escape auf weitere Zeichen gewartet
 
 	while(1)
