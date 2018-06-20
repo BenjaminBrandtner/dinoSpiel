@@ -9,4 +9,4 @@
 # Git
 - Commit Nachrichten auf Deutsch
 - Commit wenn ein sinnvoller Codeabschnitt fertiggestellt ist
-- Commit von unvollständigem Code um in der Schule daran weiterzuarbeiten ist zugelassen. Kennzeichnen mit:
+- Commit von unvollständigem Code um in der Schule/zuhause daran weiterzuarbeiten ist zugelassen. Kennzeichnen mit: Unvollständig
