@@ -22,7 +22,7 @@ void scoreboardSpeichern(struct scoreEintrag scores[]);
 void scoreboardEinlesen(struct scoreEintrag scores[])
 {
 	FILE *datei;
-	char zeile[22]; //5 Ziffern + ';' + 15 Buchstaben + '\0'
+	char zeile[23]; //5 Ziffern + ';' + 15 Buchstaben + '\n' + '\0'
 	char punkteString[6]; //5 Ziffern + '\0'
 	int i;
 	int verschiebung;
@@ -31,7 +31,7 @@ void scoreboardEinlesen(struct scoreEintrag scores[])
 
 	for(i=0;i<10;i++)
 	{
-		fgets(zeile,21,datei);
+		fgets(zeile,22,datei);
 		verschiebung=split(zeile, punkteString, ';');
 		scores[i].punktzahl=atoi(punkteString);
 		split(zeile+verschiebung, (scores[i].name), ';');
