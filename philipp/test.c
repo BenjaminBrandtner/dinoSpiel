@@ -23,7 +23,7 @@ struct pos_wolken {
 };
 
 struct pos_dino {
-	int y;
+	float y;
 	float x;
 };
 
@@ -92,10 +92,10 @@ int main(void)
 		anzeigenUeberschrift(&ueberschrift,5,COLS/2-41);
 		
 		
-		if((eingabe=getch())==KEY_UP && sprungtimer<0)
+		/*if((eingabe=getch())==KEY_UP && sprungtimer<0)
 		{
-			sprungtimer=40;
-		}
+			sprungtimer=18;
+		}*/
 
 		//rechne
 		if(sprungtimer>0)
