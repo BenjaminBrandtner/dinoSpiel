@@ -8,7 +8,7 @@ List die passenden texturen ein und speichert sie in einen Struct*/
 void einlesenTexturen(struct tex_rest *textur, char pfad[])
 {
 	FILE *in;
-	char temp[20];
+	char temp[25];
 	int i,j;
 	
 	in = fopen(pfad,"r");
@@ -20,7 +20,7 @@ void einlesenTexturen(struct tex_rest *textur, char pfad[])
 
 	for(i=0;i<18;i++)
 	{
-		fgets(temp,22,in);
+		fgets(temp,25,in);
 		
 		for(j=0;j<21;j++)
 		{

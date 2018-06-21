@@ -28,7 +28,7 @@ void anzeigenWolken(struct tex_wolken *textur, int y, int x)
 	
 	for (i = 0; i < 5; i++)
 	{
-		for (j = 0; j < 28; j++)
+		for (j = 0; j < 18; j++)
 		{
 			if((*textur).textur[i][j]=='#')
 			{
