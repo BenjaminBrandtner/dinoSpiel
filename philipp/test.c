@@ -16,18 +16,21 @@ struct ueberschrift
 };
 
 
-struct pos_wolken {
+struct pos_wolken 
+{
 	int y;
 	float x;
 	int textur_id;
 };
 
-struct pos_dino {
+struct pos_dino 
+{
 	float y;
 	float x;
 };
 
-struct pos_kaktus {
+struct pos_kaktus 
+{
 	float x;
 	int textur_id;
 };
