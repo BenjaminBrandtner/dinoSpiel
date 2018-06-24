@@ -9,14 +9,11 @@ struct scoreEintrag
 	char name[15];
 };
 
-//Globale Konstante
-const int scoreboardY = 9;
-
 //Prototypen
-void scoreboardAnzeigen(struct scoreEintrag scores[]);
 void scoreboardEinlesen(struct scoreEintrag scores[]);
-bool neuerHighscore(int punktzahl, struct scoreEintrag scores[]);
-void scoreEintragen(int punktzahl, struct scoreEintrag scores[]);
+WINDOW *scoreboardAnzeigen(struct scoreEintrag scores[], int scoreboardY);
+bool neuerHighscore(struct scoreEintrag scores[], int punktzahl);
+void scoreEintragen(struct scoreEintrag scores[], int scoreboardY, int punktzahl);
 void scoreboardSpeichern(struct scoreEintrag scores[]);
 
 void scoreboardEinlesen(struct scoreEintrag scores[])
@@ -39,22 +36,25 @@ void scoreboardEinlesen(struct scoreEintrag scores[])
 	fclose(datei);
 }
 
-void scoreboardAnzeigen(struct scoreEintrag scores[])
+WINDOW * scoreboardAnzeigen(struct scoreEintrag scores[], int scoreboardY)
 {
+	WINDOW *scoreboardFenster;
 	int i;
 
-	clear();
-
+	//Erstelle Scoreboard Fenster, x == COLS/2-14 führt zur mittigen Platzierung
+	scoreboardFenster=newwin(12, 27, scoreboardY,COLS/2-14);
+	wborder(scoreboardFenster, '|','|','-','-','#','#','#','#'); //l,r,t,b,tl,tr,bl,br
 	for(i=0;i<10;i++)
 	{
-		//Ein Eintrag ist maximal 23 Zeichen lang, die Hälfte davon ist ~11. Wenn jede Zeile an COLS/2-11 beginnt, führt das zur mittigen Platzierung
-		mvprintw(scoreboardY+i,COLS/2-11,"%5i - %s\n", scores[i].punktzahl, scores[i].name);
+		mvwprintw(scoreboardFenster,i+1,2,"%5i - %s", scores[i].punktzahl, scores[i].name);
 	}
 
-	refresh();
+	wrefresh(scoreboardFenster);
+
+	return scoreboardFenster;
 }
 
-bool neuerHighscore(int punktzahl, struct scoreEintrag scores[])
+bool neuerHighscore(struct scoreEintrag scores[], int punktzahl)
 {
 	if(punktzahl>=scores[9].punktzahl)
 	{
@@ -66,8 +66,9 @@ bool neuerHighscore(int punktzahl, struct scoreEintrag scores[])
 	}
 }
 
-void scoreEintragen(int punktzahl, struct scoreEintrag scores[])
+void scoreEintragen(struct scoreEintrag scores[], int scoreboardY, int punktzahl)
 {
+	WINDOW *scoreboardFenster;
 	int i=10;
 	struct scoreEintrag temp;
 
@@ -85,21 +86,17 @@ void scoreEintragen(int punktzahl, struct scoreEintrag scores[])
 		i--;
 	}
 
-	//Konsole für Eingabe vorbereiten
+	//Konsoleneigenschaften für Eingabe vorbereiten
 	curs_set(1);
 	echo();
-	nodelay(stdscr, FALSE);
-	//TO-DO: nodelay des stdscr müsste garnicht berührt werden, wenn das Scoreboard in einem extra Fenster erstellt werden würde
 
 	//Eingabe
-	scoreboardAnzeigen(scores);
-	mvgetstr(scoreboardY+i,COLS/2-11+8,scores[i].name);
-	//TO-DO: eingabe auf 15 zeichen beschränken
+	scoreboardFenster=scoreboardAnzeigen(scores, scoreboardY);
+	mvwgetnstr(scoreboardFenster,i+1,10,scores[i].name, 15);
 
 	//Konsoleneigenschaften zurücksetzen
 	curs_set(0);
 	noecho();
-	/* nodelay(stdscr, TRUE); */
 }
 
 void scoreboardSpeichern(struct scoreEintrag scores[])

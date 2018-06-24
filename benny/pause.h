@@ -6,7 +6,7 @@
 //Prototyp
 void zeigePause (int pausemenuY);
 
-//Präporzessor Anweisungen
+//Präprozessor-Anweisungen
 //Der von ncurses definierte Wert für Enter funktioniert nicht immer. Hier wird er auf ASCII 10 also '\n' gesetzt.
 //Standardmäßig wird von ncurses kein Makro für den Escape Knopf angelegt, da vom Benutzen des Escape Keys als Taste mit einer einzelnen Funktion abgeraten wird.
 #undef KEY_ENTER
@@ -82,12 +82,14 @@ void zeigePause (int pausemenuY)
 		mvwchgat(pauseMenu, auswahl, 1, width-2, A_REVERSE, 0, NULL);
 
 		wrefresh(pauseMenu);
-	}
+	}//end while
 
+	//Lösche das Pausemenü
 	wclear(pauseMenu);
 	wrefresh(pauseMenu);
 	delwin(pauseMenu);
 
+	//Entscheide aufgrund der Auswahl, wie es weitergeht
 	switch(auswahl)
 	{
 		case 1: //Fortsetzen

@@ -3,4 +3,7 @@
 - Installationsanleitung (ncurses installieren, Spiel kompilieren)
 - Benutzerhandbuch (Spielregeln, Benutzen des Spieles)
 - Struktogramm oder Ähnliches für eine Funktion
-- Arbeiten mit einer Bibliothek erklären
+- Eine Funktion mit Inline-Kommentaren 
+ - Hierfür eignet sich pauseAnzeigen(), die ist bereits komplett auskommentiert
+
+- Beim Vorstellen Beim Vorstellen: Arbeiten mit einer Bibliothek erklären
