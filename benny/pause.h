@@ -1,67 +1,32 @@
 /*Author: Benjamin Brandtner
- * pauseMenü ohne ncurses menu library */
+ * Erstellt und zeigt ein Pausemenü an, dass über dem Spielfeld liegt und das Spiel unterbricht. 
+ * Mit den Pfeiltasten kann eine Auswahl getroffen, mit Enter ausgewählt werden. 
+ * Mit ESC wird das Menü sofort geschlossen und das Spiel fortgesetzt. */
 
-#include <stdio.h>
-#include <string.h>
-#include <unistd.h>
-#include <stdlib.h> //für exit()
-#include <ncurses.h>
+//Prototyp
+void zeigePause (int pausemenuY);
 
+//Präporzessor Anweisungen
 //Der von ncurses definierte Wert für Enter funktioniert nicht immer. Hier wird er auf ASCII 10 also '\n' gesetzt.
-//Außerdem wird standardmäßig kein Makro für den Escape Knopf angelegt, da ncurses vom Benutzen des Escape Keys als Taste mit einer einzelnen Funktion abrät. 
+//Standardmäßig wird von ncurses kein Makro für den Escape Knopf angelegt, da vom Benutzen des Escape Keys als Taste mit einer einzelnen Funktion abgeraten wird.
 #undef KEY_ENTER
 #define KEY_ENTER 10
 #define KEY_ESC 27
 
-void zeigePause (void);
-
-int main (void)
-{
-	int schritt=0;
-	int eingabe;
-	int geschwindigkeit=19; //ms verzögerung zwischen schritten
-	
-	initscr();
-	cbreak();
-	noecho();
-	curs_set(0); //Set cursor invisible
-	nodelay(stdscr, TRUE);
-	keypad(stdscr, TRUE);
-
-	ESCDELAY=0; //0ms wird nach einem Druck auf Escape auf weitere Zeichen gewartet
-
-	while(1)
-	{
-		if((eingabe=getch())==KEY_ESC)
-		{
-			zeigePause();
-		}
-
-		//zeichne debug infos
-		mvprintw(0,0,"Schritt: %i", schritt++);
-		refresh();
-		
-		usleep(geschwindigkeit*10000);
-	}	
-
-	endwin();
-	return 0;
-}
-
-void zeigePause (void)
+void zeigePause (int pausemenuY)
 {
 	WINDOW *pauseMenu;
 	int height=5;
 	int width=51;
 	char menuPunkte[3][15]={"Fortsetzen","Menu","Beenden"}; 
-	//Umlaute in den menüPunkten führen beim Zeichnen des Rahmens und ändern der Eigenschaften teilweise dazu, dass ein Zeichen zu wenig gezeichnet wird
+	//Vorsicht: Umlaute in den menüPunkten führen beim Zeichnen des Rahmens und ändern der Eigenschaften teilweise dazu, dass ein Zeichen zu wenig gezeichnet wird
 
 	int eingabe=0;
 	int auswahl=1;
 	int auswahlVorher;
 
-	//Erstelle Pause Fenster
-	pauseMenu=newwin(height,width,20,10); //h,w,y,x
+	//Erstelle Pause Fenster, x == COLS/2-25 für mittige Platzierung
+	pauseMenu=newwin(height,width,pausemenuY,COLS/2-25); //h,w,y,x
 	
 	//Eigenschaften und Rahmen wird festgelegt
 	keypad(pauseMenu, TRUE);
@@ -126,9 +91,10 @@ void zeigePause (void)
 	switch(auswahl)
 	{
 		case 1: //Fortsetzen
+			//Nichts tun
 		break;
 		case 2: //Menü
-			//Mal schauen, wie wir das ohne ein Go-to lösen..
+			//titelmenuAnzeigen();
 		break;
 		case 3: //Beenden
 			endwin();
