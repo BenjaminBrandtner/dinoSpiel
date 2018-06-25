@@ -6,6 +6,7 @@ Eine Nachprogrammierung des [Spieles, dass Google Chrome anzeigt wenn man keine 
 Realisiert unter Linux auf der Konsole mithilfe der ncurses-Bibliothek.
 
 ## Installation
+(Sobald die Entwicklung abgeschlossen ist.)
 
 - Klonen sie das Repository oder laden sie den Ordner Dinospiel herunter.
 - Installieren sie die ncurses Bibliothek über ihren Packagemanager, auf Ubunutu: `apt-get install libncurses5-dev`
