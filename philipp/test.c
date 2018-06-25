@@ -50,7 +50,9 @@ int main(void)
 {
 	struct tex_wolken wolken[3];
 	struct tex_rest dino[2];
+	struct tex_rest kaktus[3];
 	struct pos_dino Pdino;
+	struct pos_kaktus Pkaktus[3];
 	struct ueberschrift ueberschrift;
 	struct pos_wolken poswolken[3];
 	int i, fehler, j, index, ganzzahl;
@@ -67,6 +69,10 @@ int main(void)
 	
 	einlesenTexturen(&dino[0],"texturen/dino/dino1.txt");
 	einlesenTexturen(&dino[1],"texturen/dino/dino2.txt");
+	
+	einlesenTexturen(&kaktus[0],"texturen/kaktus/kaktus1.txt");
+	einlesenTexturen(&kaktus[1],"texturen/kaktus/kaktus2.txt");
+	einlesenTexturen(&kaktus[2],"texturen/kaktus/kaktus3.txt");
 	
 	
 	einlesenUeberschrift(&ueberschrift,"texturen/ueberschrift.txt");
@@ -85,6 +91,9 @@ int main(void)
 	{
 		poswolken[i].x = -30;
 		poswolken[i].textur_id = 0;
+		
+		Pkaktus[i].textur_id = 0;
+		Pkaktus[i].x = COLS +18;
 	}
 	
 	srand(time(NULL));
@@ -133,10 +142,14 @@ int main(void)
 		
 		wechsel --;
 		
+		//katkehen anzeigen
+		
+		
+		
 		for(i=0;i<3;i++)
 		{
 			
-			poswolken[i].x -= 0.1;
+			poswolken[i].x -= 0.05;
 			if(poswolken[i].x <= -30)
 			{
 				if(0 == rand()%95)
