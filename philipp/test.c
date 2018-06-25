@@ -95,7 +95,7 @@ int main(void)
 		poswolken[i].textur_id = 0;
 		
 		Pkaktus[i].textur_id = 0;
-		Pkaktus[i].x = COLS +18;
+		Pkaktus[i].x = -20;
 	}
 	
 	srand(time(NULL));
@@ -129,8 +129,9 @@ int main(void)
 			{
 				Pdino.y = verarbeiteSprung(Pdino.y, &sprungtimer);
 			}
-			sprungtimer -= 0.25; 
-		}
+
+			sprungtimer -= 0.25;			
+			}
 		else if(sprungtimer<0)
 		{
 			Pdino.y = 32;
@@ -156,7 +157,33 @@ int main(void)
 		
 		//katkehen anzeigen
 		
+		for(i=0;i<3;i++)
+		{
+			Pkaktus[i].x -= 0.3;
+			
+			if(Pkaktus[i].x <= -30)
+			{
+				if((0 == rand()%95 && i == 0 && Pkaktus[2].x <= COLS-30) || (0 == rand()%95 && Pkaktus[i--].x <= COLS-30 && i != 0))
+				{
+					Pkaktus[i].x = COLS+18;
+					Pkaktus[i].textur_id = rand()%3;
+				}//end if
+			} //end if
+			
+			index = Pkaktus[i].textur_id;
+			if(index<3&&index>= 0)
+			{
+				anzeigenTexturen(&kaktus[index],32,Pkaktus[i].x);
+			}
+			else
+			{
+				printf("ERROR\n");
+			}
+			
+		} //end for
 		
+		
+		//wolken anzeigen
 		
 		for(i=0;i<3;i++)
 		{
