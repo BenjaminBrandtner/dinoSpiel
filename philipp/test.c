@@ -123,6 +123,10 @@ int main(void)
 			}
 			sprungtimer -= 0.25; 
 		}
+		else if(sprungtimer<0)
+		{
+			Pdino.y = 32;
+		}
 		
 		
 		
