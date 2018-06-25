@@ -8,8 +8,6 @@
 #include <string.h> //for strcpy in score.h
 #include "score.h"
 
-const int scoreboardY=9;
-
 int main (void)
 {
 	int punktzahl=4001; //Punktzahl des aktuellen Spiels, kann zu Testzwecken hier manuell eingegeben werden
@@ -25,7 +23,7 @@ int main (void)
 	curs_set(0);
 	keypad(stdscr, TRUE);
 
-	scoreboardAnzeigen(scores, scoreboardY);
+	scoreboardAnzeigen(scores);
 	sleep(2);
 	clear();
 
@@ -37,7 +35,7 @@ int main (void)
 		refresh();
 		sleep(1);
 
-		scoreEintragen(scores, scoreboardY, punktzahl);
+		scoreEintragen(scores, punktzahl);
 		sleep(1);
 
 		scoreboardSpeichern(scores);

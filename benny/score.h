@@ -11,9 +11,9 @@ struct scoreEintrag
 
 //Prototypen
 void scoreboardEinlesen(struct scoreEintrag scores[]);
-WINDOW *scoreboardAnzeigen(struct scoreEintrag scores[], int scoreboardY);
+WINDOW * scoreboardAnzeigen(struct scoreEintrag scores[]);
 bool neuerHighscore(struct scoreEintrag scores[], int punktzahl);
-void scoreEintragen(struct scoreEintrag scores[], int scoreboardY, int punktzahl);
+void scoreEintragen(struct scoreEintrag scores[], int punktzahl);
 void scoreboardSpeichern(struct scoreEintrag scores[]);
 
 void scoreboardEinlesen(struct scoreEintrag scores[])
@@ -36,13 +36,16 @@ void scoreboardEinlesen(struct scoreEintrag scores[])
 	fclose(datei);
 }
 
-WINDOW * scoreboardAnzeigen(struct scoreEintrag scores[], int scoreboardY)
+WINDOW * scoreboardAnzeigen(struct scoreEintrag scores[])
 {
 	WINDOW *scoreboardFenster;
+	int height=12;
+	int width=27;
+	int y=LINES/2-height/2;
+	int x=COLS/2-width/2;
 	int i;
 
-	//Erstelle Scoreboard Fenster, x == COLS/2-14 führt zur mittigen Platzierung
-	scoreboardFenster=newwin(12, 27, scoreboardY,COLS/2-14);
+	scoreboardFenster=newwin(height,width,y,x);
 	wborder(scoreboardFenster, '|','|','-','-','#','#','#','#'); //l,r,t,b,tl,tr,bl,br
 	for(i=0;i<10;i++)
 	{
@@ -66,7 +69,7 @@ bool neuerHighscore(struct scoreEintrag scores[], int punktzahl)
 	}
 }
 
-void scoreEintragen(struct scoreEintrag scores[], int scoreboardY, int punktzahl)
+void scoreEintragen(struct scoreEintrag scores[], int punktzahl)
 {
 	WINDOW *scoreboardFenster;
 	int i=10;
@@ -91,7 +94,7 @@ void scoreEintragen(struct scoreEintrag scores[], int scoreboardY, int punktzahl
 	echo();
 
 	//Eingabe
-	scoreboardFenster=scoreboardAnzeigen(scores, scoreboardY);
+	scoreboardFenster=scoreboardAnzeigen(scores);
 	mvwgetnstr(scoreboardFenster,i+1,10,scores[i].name, 15);
 
 	//Konsoleneigenschaften zurücksetzen
