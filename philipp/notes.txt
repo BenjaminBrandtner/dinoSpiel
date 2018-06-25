@@ -1,0 +1,2 @@
+beim ausgabe von den texturen beachten:
+	textur_id muss vorher auf 0 gesetzt werden ansonsten wirds hässlich!
