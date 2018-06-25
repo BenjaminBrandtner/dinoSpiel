@@ -11,8 +11,8 @@
 int main (void)
 {
 	int punktzahl=4001; //Punktzahl des aktuellen Spiels, kann zu Testzwecken hier manuell eingegeben werden
-	struct scoreEintrag scores[11]; 
-	//Array von Strukturen des Types scoreEintrag wird angelegt als Variable mit dem Namen scores
+	struct scoreEintrag scores[11];
+	//Array von Strukturen des Types scoreEintrag wird angelegt als Variable mit dem Namen scores. Diese Variable wird bei jeder Funktion als erster Übergabeparameter erwartet.
 
 	scoreboardEinlesen(scores);
 	//scores beinhaltet jetzt alle 10 Einträge der Highscore Liste, und einen noch leeren Platz für einen neuen Eintrag
@@ -24,18 +24,18 @@ int main (void)
 	keypad(stdscr, TRUE);
 
 	scoreboardAnzeigen(scores);
-	getch(); //Programm hält an bis Eingabe
+	sleep(2);
 	clear();
 
 	/* Spielloop hier, punktzahl wird hochgezählt bis Game Over */
 
-	if(neuerHighscore(punktzahl, scores))
+	if(neuerHighscore(scores, punktzahl))
 	{
 		printw("Neuer Highscore!");
 		refresh();
 		sleep(1);
 
-		scoreEintragen(punktzahl, scores);
+		scoreEintragen(scores, punktzahl);
 		sleep(1);
 
 		scoreboardSpeichern(scores);

@@ -16,18 +16,21 @@ struct ueberschrift
 };
 
 
-struct pos_wolken {
+struct pos_wolken 
+{
 	int y;
 	float x;
 	int textur_id;
 };
 
-struct pos_dino {
+struct pos_dino 
+{
 	float y;
 	float x;
 };
 
-struct pos_kaktus {
+struct pos_kaktus 
+{
 	float x;
 	int textur_id;
 };
@@ -37,21 +40,25 @@ struct pos_kaktus {
 #include <unistd.h>
 #include<stdbool.h>
 #include<time.h>
+#include<string.h>
 #include"texturenEinlesen.h"
 #include"texturenAusgabe.h"
+#include"pause.h"
 
-int verarbeiteSprung(int dinoY, int *timer);
+int verarbeiteSprung(int dinoY, float *timer);
 
 
 int main(void)
 {
 	struct tex_wolken wolken[3];
 	struct tex_rest dino[2];
+	struct tex_rest kaktus[3];
 	struct pos_dino Pdino;
+	struct pos_kaktus Pkaktus[3];
 	struct ueberschrift ueberschrift;
 	struct pos_wolken poswolken[3];
-	int i, fehler, j;
-	int sprungtimer=0;
+	int i, fehler, j, index, ganzzahl;
+	float sprungtimer=0;
 	int wechsel = 100;
 	char eingabe;
 	char pfad[30];
@@ -64,6 +71,10 @@ int main(void)
 	
 	einlesenTexturen(&dino[0],"texturen/dino/dino1.txt");
 	einlesenTexturen(&dino[1],"texturen/dino/dino2.txt");
+	
+	einlesenTexturen(&kaktus[0],"texturen/kaktus/kaktus1.txt");
+	einlesenTexturen(&kaktus[1],"texturen/kaktus/kaktus2.txt");
+	einlesenTexturen(&kaktus[2],"texturen/kaktus/kaktus3.txt");
 	
 	
 	einlesenUeberschrift(&ueberschrift,"texturen/ueberschrift.txt");
@@ -81,34 +92,54 @@ int main(void)
 	for(i=0;i<3;i++)
 	{
 		poswolken[i].x = -30;
+		poswolken[i].textur_id = 0;
+		
+		Pkaktus[i].textur_id = 0;
+		Pkaktus[i].x = -20;
 	}
 	
 	srand(time(NULL));
 	
+	sprungtimer = -1;
+	
 	do
 	{
+		eingabe=getch();
+		
+		if(eingabe==KEY_ESC)
+		{
+			zeigePause(LINES/2-5);
+			refresh();
+		}
+		
+		if(eingabe=='w' && sprungtimer<=0)
+		{
+			sprungtimer=40;
+		}
+		
 		erase();
 		
 		anzeigenUeberschrift(&ueberschrift,5,COLS/2-41);
-		
-		
-		/*if((eingabe=getch())==KEY_UP && sprungtimer<0)
-		{
-			sprungtimer=18;
-		}*/
 
 		//rechne
-		if(sprungtimer>0)
+		if(sprungtimer>=0)
 		{
-			Pdino.y = verarbeiteSprung(Pdino.y, &sprungtimer);
+			ganzzahl = sprungtimer;
+			if((sprungtimer-ganzzahl)==0)
+			{
+				Pdino.y = verarbeiteSprung(Pdino.y, &sprungtimer);
+			}
+
+			sprungtimer -= 0.25;			
+			}
+		else if(sprungtimer<0)
+		{
+			Pdino.y = 32;
 		}
-		else if (sprungtimer<0)
-		{
-			sprungtimer = 0;
-		} //end if
-		sprungtimer--; 
 		
-		if (wechsel <= 50)
+		
+		
+		if (wechsel <= 50 && sprungtimer < 0)
 		{
 			anzeigenTexturen(&dino[0], Pdino.y,10);
 		}
@@ -124,10 +155,40 @@ int main(void)
 		
 		wechsel --;
 		
+		//katkehen anzeigen
+		
+		for(i=0;i<3;i++)
+		{
+			Pkaktus[i].x -= 0.3;
+			
+			if(Pkaktus[i].x <= -30)
+			{
+				if((0 == rand()%95 && i == 0 && Pkaktus[2].x <= COLS-30) || (0 == rand()%95 && Pkaktus[i--].x <= COLS-30 && i != 0))
+				{
+					Pkaktus[i].x = COLS+18;
+					Pkaktus[i].textur_id = rand()%3;
+				}//end if
+			} //end if
+			
+			index = Pkaktus[i].textur_id;
+			if(index<3&&index>= 0)
+			{
+				anzeigenTexturen(&kaktus[index],32,Pkaktus[i].x);
+			}
+			else
+			{
+				printf("ERROR\n");
+			}
+			
+		} //end for
+		
+		
+		//wolken anzeigen
+		
 		for(i=0;i<3;i++)
 		{
 			
-			poswolken[i].x -= 0.1;
+			poswolken[i].x -= 0.05;
 			if(poswolken[i].x <= -30)
 			{
 				if(0 == rand()%95)
@@ -137,7 +198,16 @@ int main(void)
 					poswolken[i].textur_id = rand()%3;
 				}
 			} //end if
-			anzeigenWolken(&wolken[poswolken[i].textur_id],poswolken[i].y,poswolken[i].x);
+			index = poswolken[i].textur_id;
+			if(index<3&&index>= 0)
+			{
+				anzeigenWolken(&wolken[index],poswolken[i].y,poswolken[i].x);
+			}
+			else
+			{
+				printf("ERROR\n");
+			}
+			
 		} //end for
 		
 		attron(A_REVERSE);
@@ -153,7 +223,7 @@ int main(void)
 		fehler = usleep(1000);
 		
 		
-	}while((eingabe=getch())!='q');
+	}while(eingabe!='q');
 	
 	
 	endwin();
@@ -162,7 +232,7 @@ int main(void)
 }
 
 
-int verarbeiteSprung(int dinoY, int *timer)
+int verarbeiteSprung(int dinoY, float *timer)
 {
 	if(*timer<=40&&*timer>=22)
 	{
