@@ -90,15 +90,14 @@ int main(void)
 	
 	do
 	{
+		if((eingabe=getch())==KEY_UP && sprungtimer<0)
+		{
+			sprungtimer=18;
+		}
+		
 		erase();
 		
 		anzeigenUeberschrift(&ueberschrift,5,COLS/2-41);
-		
-		
-		/*if((eingabe=getch())==KEY_UP && sprungtimer<0)
-		{
-			sprungtimer=18;
-		}*/
 
 		//rechne
 		if(sprungtimer>0)
