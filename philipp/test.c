@@ -40,8 +40,10 @@ struct pos_kaktus
 #include <unistd.h>
 #include<stdbool.h>
 #include<time.h>
+#include<string.h>
 #include"texturenEinlesen.h"
 #include"texturenAusgabe.h"
+#include"pause.h"
 
 int verarbeiteSprung(int dinoY, float *timer);
 
@@ -104,6 +106,12 @@ int main(void)
 	{
 		eingabe=getch();
 		
+		if(eingabe==KEY_ESC)
+		{
+			zeigePause(LINES/2-5);
+			refresh();
+		}
+		
 		if(eingabe=='w' && sprungtimer<=0)
 		{
 			sprungtimer=40;
@@ -130,7 +138,7 @@ int main(void)
 		
 		
 		
-		if (wechsel <= 50)
+		if (wechsel <= 50 && sprungtimer < 0)
 		{
 			anzeigenTexturen(&dino[0], Pdino.y,10);
 		}
