@@ -38,7 +38,7 @@ struct pos_kaktus
 
 #include<stdio.h>
 #include<ncurses.h>
-#include <unistd.h>
+#include<unistd.h>
 #include<stdbool.h>
 #include<time.h>
 #include<string.h>
@@ -63,6 +63,7 @@ int main(void)
 	int wechsel = 100;
 	char eingabe;
 	char pfad[30];
+	bool debuging_mode = false;
 	ESCDELAY = 50;
 	
 	//texturen einlesen
@@ -81,16 +82,18 @@ int main(void)
 	
 	einlesenUeberschrift(&ueberschrift,"texturen/ueberschrift.txt");
 	
-	//standart were zuweisung
+	//standart Werte zuweisung
 	
 	Pdino.y = 32;
 	
+	//ncurses aktiviren und anpassen
 	initscr();
 	cbreak();
 	curs_set(0);
 	nodelay(stdscr,true);
 	keypad(stdscr,true);
 	
+	//standart werte für struct
 	for(i=0;i<3;i++)
 	{
 		poswolken[i].x = -30;
@@ -114,7 +117,19 @@ int main(void)
 			refresh();
 		}
 		
-		if(eingabe=='w' && sprungtimer<=0)
+		if(eingabe=='d')
+		{
+			if(!debuging_mode)
+			{
+				debuging_mode = true;
+			}
+			else
+			{
+				debuging_mode = false;
+			}
+		}
+		
+		if(eingabe==' ' && sprungtimer<=0)
 		{
 			sprungtimer=40;
 		}
@@ -162,9 +177,15 @@ int main(void)
 		for(i=0;i<3;i++)
 		{
 			Pkaktus[i].x -= 0.3;
-			mvprintw(0,0,"%f | %f | %f",Pkaktus[0].x,Pkaktus[1].x,Pkaktus[2].x);
+			
+			if(debuging_mode)
+			{
+				mvprintw(0,0,"%f | %f | %f",Pkaktus[0].x,Pkaktus[1].x,Pkaktus[2].x);
+			} //end if
+			
 			if(Pkaktus[i].x <= -30)
 			{
+				/*Diesee langne IFs sind nötig damit die kaktehen nicht zu nah beiernander erscheinen*/
 				if(0 == rand()%95 && i == 0 && Pkaktus[2].x <= (COLS-40) && Pkaktus[1].x <= (COLS-40))
 				{
 					Pkaktus[i].x = COLS+18;
