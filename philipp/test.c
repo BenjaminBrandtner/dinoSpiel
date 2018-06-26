@@ -1,4 +1,5 @@
-
+/*Autor: Philipp Hägerich 
+Das eigentliche spiel für mehr bitte README.md lesen*/
 
 struct tex_wolken 
 {
@@ -62,6 +63,7 @@ int main(void)
 	int wechsel = 100;
 	char eingabe;
 	char pfad[30];
+	ESCDELAY = 50;
 	
 	//texturen einlesen
 	
@@ -108,7 +110,7 @@ int main(void)
 		
 		if(eingabe==KEY_ESC)
 		{
-			zeigePause(LINES/2-5);
+			zeigePause();
 			refresh();
 		}
 		
@@ -160,26 +162,38 @@ int main(void)
 		for(i=0;i<3;i++)
 		{
 			Pkaktus[i].x -= 0.3;
-			
+			mvprintw(0,0,"%f | %f | %f",Pkaktus[0].x,Pkaktus[1].x,Pkaktus[2].x);
 			if(Pkaktus[i].x <= -30)
 			{
-				if((0 == rand()%95 && i == 0 && Pkaktus[2].x <= COLS-30) || (0 == rand()%95 && Pkaktus[i--].x <= COLS-30 && i != 0))
+				if(0 == rand()%95 && i == 0 && Pkaktus[2].x <= (COLS-40) && Pkaktus[1].x <= (COLS-40))
+				{
+					Pkaktus[i].x = COLS+18;
+					Pkaktus[i].textur_id = rand()%3;
+				}
+				else if(0 == rand()%95 && Pkaktus[0].x <= (COLS-40) && Pkaktus[2].x <= (COLS-40) && i == 1)
+				{
+					Pkaktus[i].x = COLS+18;
+					Pkaktus[i].textur_id = rand()%3;
+				}
+				else if(0 == rand()%95 && Pkaktus[1].x <= (COLS-40) && Pkaktus[0].x <= (COLS-40) && i == 2)
 				{
 					Pkaktus[i].x = COLS+18;
 					Pkaktus[i].textur_id = rand()%3;
 				}//end if
-			} //end if
+			}//end if
 			
 			index = Pkaktus[i].textur_id;
 			if(index<3&&index>= 0)
 			{
-				anzeigenTexturen(&kaktus[index],32,Pkaktus[i].x);
+				if(Pkaktus[i].x > -30)
+				{
+					anzeigenTexturen(&kaktus[index],32,Pkaktus[i].x);
+				} //end if
 			}
 			else
 			{
 				printf("ERROR\n");
 			}
-			
 		} //end for
 		
 		
@@ -220,7 +234,7 @@ int main(void)
 		
 		refresh();
 		
-		fehler = usleep(1000);
+		fehler = usleep(500);
 		
 		
 	}while(eingabe!='q');
