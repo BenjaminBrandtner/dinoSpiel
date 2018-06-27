@@ -3,7 +3,7 @@
  * Mit den Pfeiltasten kann eine Auswahl getroffen, mit Enter ausgewählt werden. 
  * Mit ESC wird das Menü sofort geschlossen und das Spiel fortgesetzt. */
 
-void zeigePause()
+int zeigePause()
 {
 	WINDOW *pausemenu;
 	int height=5; //Drei Menüpunkte, 2 Zeilen für Rahmen
@@ -87,10 +87,10 @@ void zeigePause()
 	switch(auswahl)
 	{
 		case 1: //Fortsetzen
-			//Nichts tun
+			return 1;
 		break;
 		case 2: //Menü
-			//titelmenuAnzeigen();
+			return 2;
 		break;
 		case 3: //Beenden
 			endwin();

@@ -63,6 +63,7 @@ int main(void)
 
 	while(auswahl != 6)
 	{
+		erase();
 		switch(auswahl)
 		{
 			case 1:

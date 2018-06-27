@@ -28,9 +28,9 @@ int spiel(struct tex_rest dino[], struct tex_rest kaktus[],struct tex_wolken wol
 	struct pos_kaktus Pkaktus[3];
 	struct pos_wolken poswolken[3];
 	int i, fehler, j, index, sprungrytmus;
+	int auswahl = 1;
 	int sprungtimer=0;
 	int wechsel = 100;
-	int auswahl = 0;
 	char eingabe;
 	char pfad[30];
 	bool debuging_mode = false;
@@ -57,7 +57,7 @@ int spiel(struct tex_rest dino[], struct tex_rest kaktus[],struct tex_wolken wol
 		
 		if(eingabe==KEY_ESC)
 		{
-			zeigePause();
+			auswahl = zeigePause();
 			refresh();
 		}
 		
@@ -202,12 +202,20 @@ int spiel(struct tex_rest dino[], struct tex_rest kaktus[],struct tex_wolken wol
 		fehler = usleep(1000);
 		
 		
-	}while(eingabe!='q');
+	}while(eingabe!='q'&&auswahl==1);
 	
 	
 	endwin();
+	if(auswahl==2)
+	{
+		clear();
+		return 5;
+	}
+	else if(auswahl==3)
+	{
+		return 6;
+	}
 	
-	return auswahl;
 }
 
 
