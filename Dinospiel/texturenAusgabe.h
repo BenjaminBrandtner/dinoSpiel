@@ -41,13 +41,10 @@ void anzeigenWolken(struct tex_wolken *textur, int y, int x)
 	return;
 }
 
-void anzeigenUeberschrift(struct ueberschrift *textur, int y, int x)
+void anzeigenUeberschrift(WINDOW *ueberschriftFenster, struct ueberschrift *textur)
 {
 	int i;
 	int j;
-	
-	start_color();
-	init_pair(1,COLOR_GREEN,COLOR_BLACK);
 	
 	for (i = 0; i < 7; i++)
 	{
@@ -55,13 +52,16 @@ void anzeigenUeberschrift(struct ueberschrift *textur, int y, int x)
 		{
 			if((*textur).textur[i][j]=='#')
 			{
-				attron(A_REVERSE);
-				attron(COLOR_PAIR(1));
-				mvprintw(y+i,x+j," ");
-				attroff(A_REVERSE);
-				attroff(COLOR_PAIR(1));
+				wattron(ueberschriftFenster, A_REVERSE);
+				wattron(ueberschriftFenster, COLOR_PAIR(1));
+				mvwprintw(ueberschriftFenster,i,j," ");
+				wattroff(ueberschriftFenster, A_REVERSE);
+				wattroff(ueberschriftFenster, COLOR_PAIR(1));
 			} //end if
 		} //end for
 	} //end for
+
+	wrefresh(ueberschriftFenster);
+
 	return;
 }

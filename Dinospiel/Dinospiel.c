@@ -27,6 +27,7 @@
 
 int main(void)
 {
+	WINDOW *ueberschriftFenster;
 	struct tex_wolken wolken[3];
 	struct tex_rest dino[2];
 	struct tex_rest kaktus[3];
@@ -49,8 +50,9 @@ int main(void)
 	einlesenTexturen(&kaktus[2],"texturen/kaktus/kaktus3.txt");
 	
 	einlesenUeberschrift(&ueberschrift,"texturen/ueberschrift.txt");
-
+	
 	scoreboardEinlesen(scores);
+
 
 	//ncurses aktivieren und anpassen
 	initscr();
@@ -60,6 +62,11 @@ int main(void)
 	nodelay(stdscr,true);
 	keypad(stdscr,true);
 	ESCDELAY = 50;
+
+	start_color();
+	init_pair(1,COLOR_GREEN,COLOR_BLACK);
+
+	ueberschriftFenster=newwin(7,82,0,COLS/2-41);
 
 	while(auswahl != 6)
 	{
@@ -95,6 +102,7 @@ int main(void)
 				auswahl = 1;
 			break;
 			case 5:
+				anzeigenUeberschrift(ueberschriftFenster, &ueberschrift);
 				auswahl = zeigeHauptmenu();
 			break;
 		}
