@@ -204,11 +204,10 @@ int spiel(struct tex_rest dino[], struct tex_rest kaktus[],struct tex_wolken wol
 		
 	}while(eingabe!='q'&&auswahl==1);
 	
-	
-	endwin();
+	clear();
+	refresh();
 	if(auswahl==2)
 	{
-		clear();
 		return 5;
 	}
 	else if(auswahl==3)
