@@ -8,17 +8,13 @@ Realisiert unter Linux auf der Konsole mithilfe der ncurses-Bibliothek.
 ![Screenshot dinoSpiel](screenshot.png)
 
 ## Installation
-(Sobald die Entwicklung abgeschlossen ist.)
-
-- Klonen sie das Repository oder laden sie den Ordner Dinospiel herunter.
-- Installieren sie die ncurses Bibliothek über ihren Packagemanager, auf Ubunutu: `apt-get install libncurses5-dev`
-- Im Ordner Dinospiel kompilieren Sie dinospiel.c: `gcc dinospiel.c -lncurses`
-- Führen sie die erstellte Datei aus: `./a.out`
+- Klonen Sie das Repository oder laden Sie den Ordner Dinospiel herunter.
+- Installieren Sie die ncurses Bibliothek über ihren Packagemanager, auf Ubunutu: `apt-get install libncurses5-dev`
+- Im Ordner Dinospiel kompilieren Sie Dinospiel.c und linken dabei ncurses: `gcc Dinospiel.c -lncurses`
+- Führen Sie die erstellte Datei aus: `./a.out`
 
 ## Benutzerhandbuch
-
-Zu Beginn wird Sie das Spiel bitten, Ihre Konsole auf die richtige Größe einzustellen. Vergrößern Sie Ihr Konsolenfenster oder verkleinern sie die Schriftgröße so weit, dass der komplette Dino auf den Bildschirm passt. Drücken sie dann Enter zum Fortfahren.  
-Das Titelmenü wird angezeigt, am unteren Bildschirmrand sehen sie alle Steuerungstasten:
+Zu Beginn wird Sie das Spiel bitten, Ihre Konsole auf die richtige Größe einzustellen. Vergrößern Sie Ihr Konsolenfenster oder verkleinern Sie die Schriftgröße so weit, dass der komplette Dino auf den Bildschirm passt. Drücken Sie dann Enter zum Fortfahren.  
 
 ### Steuerung
 #### In Menüs:
