@@ -212,11 +212,11 @@ int spiel(struct tex_rest dino[], struct tex_rest kaktus[],struct tex_wolken wol
 		fehler = usleep(1000);
 		
 		
-	}while(eingabe!='q'&&auswahl==1);
+	}while(auswahl==1&&!kol);
 	
 	clear();
 	refresh();
-	if(auswahl==2)
+	if(auswahl==2||kol)
 	{
 		return 5;
 	}
