@@ -1,17 +1,17 @@
 /*Autor: Philipp Hägeirich
 Kolisionsabfrage für dino*/
 
-bool kolision(int Ydino, int Xkaktus; struct tex_rest *dino,struct tex_rest *kaktus) //Xdino=10 und Ykaktus=32
+bool kolision(int Ydino, int Xkaktus, struct tex_rest *dino,struct tex_rest *kaktus) //Xdino=10 und Ykaktus=32
 {
 	int Xdino=10;
 	int Ykaktus=32;
 	int gemeinsamme_reihen, gemeinsamme_spalten;
 	int i, j;
 	
-	gemeinsamme_spaltens = Ykaktus - Ydino + 21;
+	gemeinsamme_spalten = Ykaktus - Ydino + 21;
 	gemeinsamme_reihen = Xkaktus - Xdino + 18;
 	
-	if(geimensamme_spalten>=0)
+	if(gemeinsamme_spalten>=0)
 	{
 		for(i=0;i<gemeinsamme_spalten;i++) //für dino 21-gemeinsamme_spalten+i
 		{

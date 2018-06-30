@@ -1,6 +1,21 @@
 /*Autor: Philipp Hägerich 
 Das eigentliche spiel für mehr bitte README.md lesen*/
 
+struct tex_wolken 
+{
+	char textur[5][28];
+};
+
+struct tex_rest 
+{
+	char textur[18][21];
+};
+
+struct ueberschrift 
+{
+	char textur[7][82];
+};
+
 struct pos_wolken 
 {
 	int y;
@@ -19,25 +34,59 @@ struct pos_kaktus
 	int textur_id;
 };
 
-#include"pause.h"
-#include"kolision.h"
-
 int verarbeiteSprung(int dinoY, int timer);
 
+#include<stdio.h>
+#include<ncurses.h>
+#include<unistd.h>
+#include<stdbool.h>
+#include<time.h>
+#include<string.h>
+#include"texturenEinlesen.h"
+#include"texturenAusgabe.h"
+#include"pause.h"
 
-int game(struct tex_rest dino[], struct tex_rest kaktus[],struct tex_wolken wolken[])
+
+int main(void)
 {
-	struct pos_dino Pdino;
+	struct tex_wolken wolken[3];
+	struct tex_rest dino[2];
+	struct tex_rest kaktus[3];
+	struct ueberschrift ueberschrift;
+	int auswahl;
+	
+	//texturen einlesen
+	
+	einlesenWolken(&wolken[0],"texturen/wolken/wolken1.txt");
+	einlesenWolken(&wolken[1],"texturen/wolken/wolken2.txt");
+	einlesenWolken(&wolken[2],"texturen/wolken/wolken3.txt");
+	
+	einlesenTexturen(&dino[0],"texturen/dino/dino1.txt");
+	einlesenTexturen(&dino[1],"texturen/dino/dino2.txt");
+	
+	einlesenTexturen(&kaktus[0],"texturen/kaktus/kaktus1.txt");
+	einlesenTexturen(&kaktus[1],"texturen/kaktus/kaktus2.txt");
+	einlesenTexturen(&kaktus[2],"texturen/kaktus/kaktus3.txt");
+	
+	
+	einlesenUeberschrift(&ueberschrift,"texturen/ueberschrift.txt");
+	
+	//ncurses aktiviren und anpassen
+	initscr();
+	cbreak();
+	curs_set(0);
+	nodelay(stdscr,true);
+	keypad(stdscr,true);
+	
+		struct pos_dino Pdino;
 	struct pos_kaktus Pkaktus[3];
 	struct pos_wolken poswolken[3];
 	int i, fehler, j, index, sprungrytmus;
 	int sprungtimer=0;
 	int wechsel = 100;
-	int auswahl = 0;
 	char eingabe;
 	char pfad[30];
 	bool debuging_mode = false;
-	bool kol = false;
 	ESCDELAY = 50;
 	
 	Pdino.y = 320;
@@ -105,7 +154,7 @@ int game(struct tex_rest dino[], struct tex_rest kaktus[],struct tex_wolken wolk
 		
 		
 		
-		if (wechsel <= 50 || sprungtimer > 0)
+		if (wechsel <= 50 && sprungtimer < 0)
 		{
 			anzeigenTexturen(&dino[0], Pdino.y/10,10);
 		}
@@ -164,12 +213,6 @@ int game(struct tex_rest dino[], struct tex_rest kaktus[],struct tex_wolken wolk
 			{
 				printf("ERROR\n");
 			}
-			/*
-			if((Pkaktus[i].x/10)<=40)
-			{
-				kol = kolision(Pdino.y/10, Pkaktus[i].x, &dino[0],&kaktus[Pkaktus[i].textur_id]);
-			} //end if
-			*/
 		} //end for
 		
 		
@@ -210,17 +253,15 @@ int game(struct tex_rest dino[], struct tex_rest kaktus[],struct tex_wolken wolk
 		
 		refresh();
 		
-		fehler = usleep(1000);
+		fehler = usleep(10000);
 		
 		
-	}while(eingabe!='q' && !kol);
-	
+	}while(eingabe!='q');
 	
 	endwin();
 	
-	return auswahl;
+	return 0;
 }
-
 
 int verarbeiteSprung(int dinoY, int timer)
 {
