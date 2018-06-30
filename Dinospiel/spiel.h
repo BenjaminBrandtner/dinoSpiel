@@ -23,8 +23,9 @@ struct pos_kaktus
 
 //Prototypen
 int verarbeiteSprung(int dinoY, int timer);
+void zeigeGameover(int *punktzahl);
 
-int spiel(struct tex_rest dino[], struct tex_rest kaktus[],struct tex_wolken wolken[])
+int spiel(struct tex_rest dino[], struct tex_rest kaktus[],struct tex_wolken wolken[], int *punktzahl)
 {
 	struct pos_dino Pdino;
 	struct pos_kaktus Pkaktus[3];
@@ -39,6 +40,7 @@ int spiel(struct tex_rest dino[], struct tex_rest kaktus[],struct tex_wolken wol
 	bool kol = false;
 	ESCDELAY = 50;
 	
+	*punktzahl = 0;
 	Pdino.y = 320;
 	
 	//standart werte für struct
@@ -55,6 +57,7 @@ int spiel(struct tex_rest dino[], struct tex_rest kaktus[],struct tex_wolken wol
 	
 	sprungtimer = -1;
 	
+	//Spielloop
 	do
 	{
 		eingabe=getch();
@@ -77,7 +80,7 @@ int spiel(struct tex_rest dino[], struct tex_rest kaktus[],struct tex_wolken wol
 			}
 		}
 		
-		if(eingabe==' ' && sprungtimer<=0)
+		if(sprungtimer<=0 && eingabe==' ' || eingabe==KEY_UP )
 		{
 			sprungtimer=600;
 			sprungrytmus = 0;
@@ -101,9 +104,9 @@ int spiel(struct tex_rest dino[], struct tex_rest kaktus[],struct tex_wolken wol
 		{
 			Pdino.y = 320;
 		}
+		(*punktzahl)++;
 		
-		
-		
+		//Dino anzeigen
 		if (wechsel <= 50 && sprungtimer < 0)
 		{
 			anzeigenTexturen(&dino[0], Pdino.y/10,10);
@@ -116,12 +119,11 @@ int spiel(struct tex_rest dino[], struct tex_rest kaktus[],struct tex_wolken wol
 		if(wechsel == 0)
 		{
 			wechsel = 100;
-		} //ennd if
+		} //end if
 		
 		wechsel --;
 		
-		//katkehen anzeigen
-		
+		//katkeen anzeigen
 		for(i=0;i<3;i++)
 		{
 			Pkaktus[i].x -= 1;
@@ -133,7 +135,7 @@ int spiel(struct tex_rest dino[], struct tex_rest kaktus[],struct tex_wolken wol
 			
 			if(Pkaktus[i].x <= -300)
 			{
-				/*Diesee langne IFs sind nötig damit die kaktehen nicht zu nah beiernander erscheinen*/
+				/*Diesee langen IFs sind nötig damit die kakteen nicht zu nah beieinander erscheinen*/
 				if(0 == rand()%95 && i == 0 && (Pkaktus[2].x*10) <= ((COLS-60)*10) && (Pkaktus[1].x*10) <= ((COLS-60)*10))
 				{
 					Pkaktus[i].x = COLS+18;
@@ -173,7 +175,6 @@ int spiel(struct tex_rest dino[], struct tex_rest kaktus[],struct tex_wolken wol
 		
 		
 		//wolken anzeigen
-		
 		for(i=0;i<3;i++)
 		{
 			
@@ -199,13 +200,16 @@ int spiel(struct tex_rest dino[], struct tex_rest kaktus[],struct tex_wolken wol
 			
 		} //end for
 		
+		//Boden
 		attron(A_REVERSE);
-		
 		for(j=0;j<COLS;j++)
 		{
 			mvprintw(50,j," ");
 		}
 		attroff(A_REVERSE);
+
+		//Punktzahl
+		mvprintw(0,COLS-14,"Score: %i", *punktzahl);
 		
 		refresh();
 		
@@ -216,15 +220,27 @@ int spiel(struct tex_rest dino[], struct tex_rest kaktus[],struct tex_wolken wol
 	
 	clear();
 	refresh();
-	if(auswahl==2||kol)
+
+	if(kol)
 	{
-		return 5;
+		zeigeGameover(punktzahl);
+		sleep(2);
+		erase();
+		refresh();
+		return 4;
 	}
-	else if(auswahl==3)
+	else
 	{
-		return 6;
+		switch(auswahl)
+		{
+			case 2:
+				return 5;
+			break;
+			case 3:
+				return 6;
+			break;
+		}
 	}
-	
 }
 
 
@@ -240,4 +256,10 @@ int verarbeiteSprung(int dinoY, int timer)
 	}
 	
 	return dinoY;
+}
+
+void zeigeGameover(int *punktzahl)
+{
+	mvprintw(LINES/2,COLS/2-17,"Game Over! Erreichte Punktzahl: %i", *punktzahl);
+	refresh();
 }

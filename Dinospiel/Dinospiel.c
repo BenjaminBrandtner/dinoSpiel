@@ -53,7 +53,6 @@ int main(void)
 	
 	scoreboardEinlesen(scores);
 
-
 	//ncurses aktivieren und anpassen
 	initscr();
 	cbreak();
@@ -73,7 +72,7 @@ int main(void)
 		switch(auswahl)
 		{
 			case 1:
-				auswahl = spiel(dino,kaktus,wolken);
+				auswahl = spiel(dino,kaktus,wolken, &punktzahl);
 			break;
 			case 2:
 				//optionenAnzeigen();
@@ -86,8 +85,11 @@ int main(void)
 			case 4:
 				if(neuerHighscore(scores, punktzahl))
 				{
-					printw("Neuer Highscore!");
+					attron(COLOR_PAIR(1));
+					mvprintw(LINES/2,COLS/2-8,"Neuer Highscore!");
+					attroff(COLOR_PAIR(1));
 					refresh();
+					sleep(2);
 
 					scoreEintragen(scores, punktzahl);
 
@@ -95,9 +97,9 @@ int main(void)
 				}
 				else
 				{
-					printw("Leider kein Highscore");
+					mvprintw(LINES/2,COLS/2-11,"Leider kein Highscore.");
 					refresh();
-					sleep(1);
+					sleep(2);
 				}
 				auswahl = 1;
 			break;
