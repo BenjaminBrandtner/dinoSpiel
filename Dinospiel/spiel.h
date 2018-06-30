@@ -19,6 +19,8 @@ struct pos_kaktus
 	int textur_id;
 };
 
+#include"kolision.h"
+
 //Prototypen
 int verarbeiteSprung(int dinoY, int timer);
 
@@ -34,6 +36,8 @@ int spiel(struct tex_rest dino[], struct tex_rest kaktus[],struct tex_wolken wol
 	char eingabe;
 	char pfad[30];
 	bool debuging_mode = false;
+	bool kol = false;
+	ESCDELAY = 50;
 	
 	Pdino.y = 320;
 	
@@ -159,6 +163,12 @@ int spiel(struct tex_rest dino[], struct tex_rest kaktus[],struct tex_wolken wol
 			{
 				printf("ERROR\n");
 			}
+			
+			if((Pkaktus[i].x/10)<=40)
+			{
+				kol = kolision(Pdino.y/10, Pkaktus[i].x, dino[0],kaktus[Pkaktus[i].textur_id]);
+			} //end if
+			
 		} //end for
 		
 		

@@ -1,7 +1,7 @@
 /*Autor: Philipp Hägerich 
 Gibt ales an bestimmten koordinaten aus*/
 
-void anzeigenTexturen(struct tex_rest *textur, int y, int x)
+void anzeigenTexturen(struct tex_rest textur, int y, int x)
 {
 	int i;
 	int j;
@@ -10,7 +10,7 @@ void anzeigenTexturen(struct tex_rest *textur, int y, int x)
 	{
 		for (j = 0; j < 21; j++)
 		{
-			if((*textur).textur[i][j]=='#')
+			if(textur.textur[i][j]=='#')
 			{
 				mvprintw(y+i,x+j," ");
 			}//end if
@@ -20,7 +20,7 @@ void anzeigenTexturen(struct tex_rest *textur, int y, int x)
 	return;
 }
 
-void anzeigenWolken(struct tex_wolken *textur, int y, int x)
+void anzeigenWolken(struct tex_wolken textur, int y, int x)
 {
 	int i;
 	int j;
@@ -29,7 +29,7 @@ void anzeigenWolken(struct tex_wolken *textur, int y, int x)
 	{
 		for (j = 0; j < 18; j++)
 		{
-			if((*textur).textur[i][j]=='#')
+			if(textur.textur[i][j]=='#')
 			{
 				
 				mvprintw(y+i,x+j," ");

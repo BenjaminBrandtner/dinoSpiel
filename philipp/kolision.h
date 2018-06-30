@@ -1,7 +1,7 @@
 /*Autor: Philipp Hägeirich
 Kolisionsabfrage für dino*/
 
-bool kolision(int Ydino, int Xkaktus, struct tex_rest *dino,struct tex_rest *kaktus) //Xdino=10 und Ykaktus=32
+bool kolision(int Ydino, int Xkaktus, struct tex_rest dinoL,struct tex_rest kaktusL) //Xdino=10 und Ykaktus=32
 {
 	int Xdino=10;
 	int Ykaktus=32;
@@ -19,7 +19,7 @@ bool kolision(int Ydino, int Xkaktus, struct tex_rest *dino,struct tex_rest *kak
 			{
 				for(j=0;j<gemeinsamme_reihen;j++) //für dino 18-gemeinsamme_reihen+j
 				{
-					if((*dino).textur[18-gemeinsamme_reihen+j][21-gemeinsamme_spalten+i]==(*kaktus).textur[j][i] && (*kaktus).textur[j][i]=='#')
+					if(dinoL.textur[18-gemeinsamme_reihen+j][21-gemeinsamme_spalten+i]==kaktusL.textur[j][i] && kaktusL.textur[j][i]=='#')
 					{
 						return true;
 					}
@@ -29,7 +29,7 @@ bool kolision(int Ydino, int Xkaktus, struct tex_rest *dino,struct tex_rest *kak
 			{
 				for(j=0;j<gemeinsamme_reihen;j++) //für dino 18-j
 				{
-					if((*dino).textur[18-j][21-gemeinsamme_spalten+i]==(*kaktus).textur[j][i] && (*kaktus).textur[j][i]=='#')
+					if(dinoL.textur[18-j][21-gemeinsamme_spalten+i]==kaktusL.textur[j][i] && kaktusL.textur[j][i]=='#')
 					{
 						return true;
 					}
@@ -45,7 +45,7 @@ bool kolision(int Ydino, int Xkaktus, struct tex_rest *dino,struct tex_rest *kak
 			{
 				for(j=0;j<gemeinsamme_reihen;j++) //für dino 18-gemeinsamme_reihen+j
 				{
-					if((*dino).textur[18-gemeinsamme_reihen+j][21-i]==(*kaktus).textur[j][i] && (*kaktus).textur[j][i]=='#')
+					if(dinoL.textur[18-gemeinsamme_reihen+j][21-i]==kaktusL.textur[j][i] && kaktusL.textur[j][i]=='#')
 					{
 						return true;
 					}
@@ -55,7 +55,7 @@ bool kolision(int Ydino, int Xkaktus, struct tex_rest *dino,struct tex_rest *kak
 			{
 				for(j=0;j<gemeinsamme_reihen;j++) //für dino 18-j
 				{
-					if((*dino).textur[18-j][21-i]==(*kaktus).textur[j][i] && (*kaktus).textur[j][i]=='#')
+					if(dinoL.textur[18-j][21-i]==kaktusL.textur[j][i] && kaktusL.textur[j][i]=='#')
 					{
 						return true;
 					}

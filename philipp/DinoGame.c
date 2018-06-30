@@ -49,7 +49,7 @@ int main(void)
 	einlesenTexturen(&kaktus[2],"texturen/kaktus/kaktus3.txt");
 	
 	
-	einlesenUeberschrift(&ueberschrift,"texturen/ueberschrift.txt");
+	//einlesenUeberschrift(&ueberschrift,"texturen/ueberschrift.txt");
 	
 	//ncurses aktiviren und anpassen
 	initscr();

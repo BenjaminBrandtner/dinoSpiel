@@ -107,11 +107,11 @@ int game(struct tex_rest dino[], struct tex_rest kaktus[],struct tex_wolken wolk
 		
 		if (wechsel <= 50 || sprungtimer > 0)
 		{
-			anzeigenTexturen(&dino[0], Pdino.y/10,10);
+			anzeigenTexturen(dino[0], Pdino.y/10,10);
 		}
 		else
 		{
-			anzeigenTexturen(&dino[1], Pdino.y/10,10);
+			anzeigenTexturen(dino[1], Pdino.y/10,10);
 		} //end if
 		
 		if(wechsel == 0)
@@ -157,19 +157,19 @@ int game(struct tex_rest dino[], struct tex_rest kaktus[],struct tex_wolken wolk
 			{
 				if(Pkaktus[i].x > -300)
 				{
-					anzeigenTexturen(&kaktus[index],32,Pkaktus[i].x);
+					anzeigenTexturen(kaktus[index],32,Pkaktus[i].x);
 				} //end if
 			}
 			else
 			{
 				printf("ERROR\n");
 			}
-			/*
+			
 			if((Pkaktus[i].x/10)<=40)
 			{
-				kol = kolision(Pdino.y/10, Pkaktus[i].x, &dino[0],&kaktus[Pkaktus[i].textur_id]);
+				kol = kolision(Pdino.y/10, Pkaktus[i].x, dino[0],kaktus[Pkaktus[i].textur_id]);
 			} //end if
-			*/
+			
 		} //end for
 		
 		
@@ -191,7 +191,7 @@ int game(struct tex_rest dino[], struct tex_rest kaktus[],struct tex_wolken wolk
 			index = poswolken[i].textur_id;
 			if(index<3&&index>= 0)
 			{
-				anzeigenWolken(&wolken[index],poswolken[i].y,poswolken[i].x/100);
+				anzeigenWolken(wolken[index],poswolken[i].y,poswolken[i].x/100);
 			}
 			else
 			{
@@ -210,7 +210,7 @@ int game(struct tex_rest dino[], struct tex_rest kaktus[],struct tex_wolken wolk
 		
 		refresh();
 		
-		fehler = usleep(1000);
+		fehler = usleep(10000);
 		
 		
 	}while(eingabe!='q' && !kol);
