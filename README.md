@@ -14,7 +14,7 @@ Realisiert unter Linux auf der Konsole mithilfe der ncurses-Bibliothek.
 - Führen Sie die erstellte Datei aus: `./a.out`
 
 ## Benutzerhandbuch
-Zu Beginn wird Sie das Spiel bitten, Ihre Konsole auf die richtige Größe einzustellen. Vergrößern Sie Ihr Konsolenfenster oder verkleinern Sie die Schriftgröße so weit, dass der komplette Dino auf den Bildschirm passt. Drücken Sie dann Enter zum Fortfahren.  
+Zu Beginn wird Ihnen das Hauptmenü gezeigt. Von hier aus können Sie das Spiel starten, die gespeicherten Highscores ansehen, die Hilfe aufrufen oder das Spiel beenden.
 
 ### Steuerung
 #### In Menüs:
