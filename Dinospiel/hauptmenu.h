@@ -16,7 +16,7 @@ int zeigeHauptmenu()
 	int y=LINES/2-height/2; //mittig
 	int x=COLS/2-width/2; //mittig
 
-	char menuPunkte[4][21]={"Spielen","Highscores anzeigen","Optionen","Beenden"}; 
+	char menuPunkte[4][21]={"Spielen","Highscores anzeigen","Hilfe","Beenden"}; 
 
 	int eingabe=0;
 	int auswahl=1;
@@ -92,7 +92,7 @@ int zeigeHauptmenu()
 		case 2: //Scoreboard
 			return 3;
 		break;
-		case 3: //Optionen
+		case 3: //Hilfe
 			return 2;
 		break;
 		case 4: //Beenden
@@ -100,4 +100,33 @@ int zeigeHauptmenu()
 		break;
 	}
 
+}
+
+void zeigeHilfe()
+{
+	WINDOW *hilfe;
+	int height=20;
+	int width=100;
+	int y=LINES/2-height/2; //mittig
+	int x=COLS/2-width/2; //mittig
+	int eingabe=0;
+
+	hilfe=newwin(height,width,y,x);
+	keypad(hilfe,TRUE);
+
+		wprintw(hilfe,"Ein Meteorit wird bald in Dinoland einschlagen. Die Dinos müssen fliehen, aber der einzige Weg führt durch die lange und gefährliche Kakteenwüste.\n"  
+	"Helfen Sie dem Dino zu entkommen! Springen Sie über die Kakteen und überleben Sie so lange wie möglich. Je länger Sie überleben, desto mehr Punkte erhalten Sie.\n"
+	"Schaffen Sie es nicht, einem Kaktus auszuweichen, bedeutet das Game Over. Wenn Sie genug Punkte erreicht haben, erhalten Sie einen Platz in der Highscoreliste! Geben Sie Ihren Namen oder einen coolen Nicknamen ein und drücken Sie Enter.\n\n");
+		wprintw(hilfe,"Steuerung:\n\nIn Menüs:\n- Pfeiltasten hoch und runter zum Verändern der Auswahl\n- Enter zum Auswählen des markierten Menüpunktes\n\nIm Spiel:\n- Pfeiltaste oben oder Leertaste zum Springen\n- ESC zum Pausieren");
+
+	wrefresh(hilfe);
+
+	while(eingabe!=KEY_ENTER && eingabe!=KEY_ESC)
+	{
+		eingabe=wgetch(hilfe);
+	}
+
+	wclear(hilfe);
+	wrefresh(hilfe);
+	delwin(hilfe);
 }

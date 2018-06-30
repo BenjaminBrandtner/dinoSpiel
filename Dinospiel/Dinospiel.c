@@ -65,7 +65,7 @@ int main(void)
 	start_color();
 	init_pair(1,COLOR_GREEN,COLOR_BLACK);
 
-	ueberschriftFenster=newwin(7,82,0,COLS/2-41);
+	ueberschriftFenster=newwin(7,82,3,COLS/2-41);
 
 	while(auswahl != 6)
 	{
@@ -75,7 +75,7 @@ int main(void)
 				auswahl = spiel(dino,kaktus,wolken, &punktzahl);
 			break;
 			case 2:
-				//optionenAnzeigen();
+				zeigeHilfe();
 				auswahl=5;
 			break;
 			case 3:
