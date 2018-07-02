@@ -2,6 +2,20 @@
  * Beinhaltet die Main Funktion die alle Sachen einließt
  * und in einem Loop zwischen verschiedenen Programmteilen springt. */
 
+ struct ueberschrift 
+{
+	char textur[7][82];
+};
+
+struct tex_wolken 
+{
+	char textur[5][28];
+};
+
+struct tex_rest 
+{
+	char textur[18][21];
+};
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -28,9 +42,6 @@
 int main(void)
 {
 	WINDOW *ueberschriftFenster;
-	struct tex_wolken wolken[3];
-	struct tex_rest dino[2];
-	struct tex_rest kaktus[3];
 	struct ueberschrift ueberschrift;
 	struct scoreEintrag scores[11];
 
@@ -38,17 +49,7 @@ int main(void)
 	int auswahl = 5;
 	
 	//Aus Dateien einlesen
-	einlesenWolken(&wolken[0],"texturen/wolken/wolken1.txt");
-	einlesenWolken(&wolken[1],"texturen/wolken/wolken2.txt");
-	einlesenWolken(&wolken[2],"texturen/wolken/wolken3.txt");
-	
-	einlesenTexturen(&dino[0],"texturen/dino/dino1.txt");
-	einlesenTexturen(&dino[1],"texturen/dino/dino2.txt");
-	
-	einlesenTexturen(&kaktus[0],"texturen/kaktus/kaktus1.txt");
-	einlesenTexturen(&kaktus[1],"texturen/kaktus/kaktus2.txt");
-	einlesenTexturen(&kaktus[2],"texturen/kaktus/kaktus3.txt");
-	
+
 	einlesenUeberschrift(&ueberschrift,"texturen/ueberschrift.txt");
 	
 	scoreboardEinlesen(scores);
@@ -72,7 +73,7 @@ int main(void)
 		switch(auswahl)
 		{
 			case 1:
-				auswahl = spiel(dino,kaktus,wolken, &punktzahl);
+				auswahl = spiel(&punktzahl);
 			break;
 			case 2:
 				zeigeHilfe();

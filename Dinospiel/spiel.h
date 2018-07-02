@@ -25,8 +25,11 @@ struct pos_kaktus
 int verarbeiteSprung(int dinoY, int timer);
 void zeigeGameover(int *punktzahl);
 
-int spiel(struct tex_rest dino[], struct tex_rest kaktus[],struct tex_wolken wolken[], int *punktzahl)
+int spiel(int *punktzahl)
 {
+	struct tex_wolken wolken[3];
+	struct tex_rest dino[2];
+	struct tex_rest kaktus[3];
 	struct pos_dino Pdino;
 	struct pos_kaktus Pkaktus[3];
 	struct pos_wolken poswolken[3];
@@ -39,6 +42,18 @@ int spiel(struct tex_rest dino[], struct tex_rest kaktus[],struct tex_wolken wol
 	bool debuging_mode = false;
 	bool kol = false;
 	ESCDELAY = 50;
+	
+	einlesenWolken(&wolken[0],"texturen/wolken/wolken1.txt");
+	einlesenWolken(&wolken[1],"texturen/wolken/wolken2.txt");
+	einlesenWolken(&wolken[2],"texturen/wolken/wolken3.txt");
+	
+	einlesenTexturen(&dino[0],"texturen/dino/dino1.txt");
+	einlesenTexturen(&dino[1],"texturen/dino/dino2.txt");
+	
+	einlesenTexturen(&kaktus[0],"texturen/kaktus/kaktus1.txt");
+	einlesenTexturen(&kaktus[1],"texturen/kaktus/kaktus2.txt");
+	einlesenTexturen(&kaktus[2],"texturen/kaktus/kaktus3.txt");
+	
 	
 	*punktzahl = 0;
 	Pdino.y = 320;

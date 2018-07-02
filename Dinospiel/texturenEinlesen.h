@@ -1,21 +1,6 @@
 /*Autor: Philipp Hägerich 
 List die passenden texturen ein und speichert sie in einen Struct*/
 
-struct tex_wolken 
-{
-	char textur[5][28];
-};
-
-struct tex_rest 
-{
-	char textur[18][21];
-};
-
-struct ueberschrift 
-{
-	char textur[7][82];
-};
-
 void einlesenTexturen(struct tex_rest *textur, char pfad[])
 {
 	FILE *in;
