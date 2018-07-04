@@ -86,4 +86,5 @@ Diese Art der Speicherung erlaubt es uns, die Texturen im vorgegebenem Rahmen ei
 # Testdocumentation
 Nach Mehrfachen ausführen des Progrgamms sind wir zu volgenden Ergebnissen gekommen:
 - Speicherzugrifsfehler beim Beenden des Programms
-- Kaktenhen werden nicht angezeigt
+- Kaktenhen werden nicht angezeigt mann kann aber mit ihen kolidiren (zusehen dur Debuger (aufrufbar mit 'd'))
+- Speicherzugrifsfehler zufällig während des Spiels
