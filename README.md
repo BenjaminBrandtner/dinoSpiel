@@ -35,4 +35,49 @@ Zu Beginn wird Ihnen das Hauptmenü gezeigt. Von hier aus können Sie das Spiel 
 ### Spielablauf
 Ein Meteorit wird bald in Dinoland einschlagen. Die Dinos müssen fliehen, aber der einzige Weg führt durch die __lange und gefährliche Kakteenwüste__.  
 Helfen Sie dem Dino zu entkommen! Springen Sie über die Kakteen und __überleben Sie so lange wie möglich__. Je länger Sie überleben, desto mehr __Punkte__ erhalten Sie.  
-Schaffen Sie es nicht, einem Kaktus auszuweichen, bedeutet das Game Over. Wenn Sie genug Punkte erreicht haben, erhalten Sie einen Platz in der __Highscoreliste!__ Geben Sie Ihren Namen oder einen coolen Nicknamen ein und drücken Sie Enter.  
+Schaffen Sie es nicht, einem Kaktus auszuweichen, bedeutet das Game Over. Wenn Sie genug Punkte erreicht haben, erhalten Sie einen Platz in der __Highscoreliste!__ Geben Sie Ihren Namen oder einen coolen Nicknamen ein und drücken Sie Enter. 
+
+# Datendocumentation
+Die Texturen sind als '#' und ' ' folgen gespeichert. Um das einlesen zu erleichtern sind haben sie bestimmte maße (Dino, Kaktus: 18x21; Wolken: 5x28; Überschrift: 7x82). z.B.:
+```
+           ########  
+          ##### #####
+          ###########
+          ###########
+          ######     
+          #########  
+#       #######      
+##    ############   
+###  ##########  #   
+###############      
+###############      
+ #############       
+  ###########        
+    ########         
+     ###  ##         
+     ##    #         
+     #     #         
+     ##    ##         
+```
+Dei texturen wurden für alles in ihre eingenen Unterordner gespeichtert:
+```
+texturen
+║
+╠ dino
+║    ╠ dino1.txt
+║    ╚ dino2.txt
+║
+╠ kaktus
+║    ╠ kaktus1.txt
+║    ╠ kaktus2.txt
+║    ╚ kaktus3.txt
+║
+╠ wolken
+║    ╠ wolken1.txt
+║    ╠ wolken2.txt
+║    ╚ wolken3.txt
+║
+╚ ueberschrift.txt
+
+```
+Diese art der speicherung erlaupt es uns die Texturen im vorgegebenem rahmen einfach zu Manipuliren.
