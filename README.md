@@ -82,3 +82,8 @@ texturen
 
 ```
 Diese Art der Speicherung erlaubt es uns, die Texturen im vorgegebenem Rahmen einfach zu Manipulieren.
+
+# Testdocumentation
+Nach Mehrfachen ausführen des Progrgamms sind wir zu volgenden Ergebnissen gekommen:
+- Speicherzugrifsfehler beim Beenden des Programms
+- Kaktenhen werden nicht angezeigt
