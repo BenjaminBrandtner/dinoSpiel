@@ -183,3 +183,5 @@ int zeigePause()
 
 ## Methodendokumentation
 Struktogramm für scoreEintragen():
+
+![Struktogramm](scoreEintragen.PNG)
