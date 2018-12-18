@@ -8,7 +8,7 @@ Realisiert unter Linux auf der Konsole mithilfe der ncurses-Bibliothek.
 ![Screenshot dinoSpiel](screenshot.png)
 
 Leider funktioniert das Spiel nicht richtig.  
-Irgendwo (vermutlich in der Ausgabe) existieren Fehler, die wir nicht finden konnten und die sich auf verschiedenen Systemen unterschiedlich auswirken. Bei manchen gibt es sofort Speicherzugriffsfehler, bei manchen ist die Anzeige stark verbugt, die Kakteen nicht zu sehen und das Spiel leider unspielbar.  
+Irgendwo (vermutlich in der Ausgabe) existieren Fehler, die wir nicht finden konnten und die sich auf verschiedenen Systemen unterschiedlich auswirken. Bei manchen gibt es sofort Speicherzugriffsfehler, bei manchen ist die Anzeige stark verbugt, die Kakteen nicht zu sehen und das Spiel ist leider unspielbar.  
 Alles darum herum funktioniert, Menüführung,  Highscores einlesen, eintragen, und speichern, Texturen einlesen. Auch das Springen des Dinos und die Kollision mit Kakteen funktionieren, werden nur nicht richtig angezeigt.
 
 Es ist natürlich enttäuschend, dass, obwohl wir so viel Arbeit reingesteckt haben, das Wichtigste nicht richtig funktioniert.  
